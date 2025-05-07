@@ -6,7 +6,7 @@
 - [x] Scaffold UI with mock data
 - [x] Setup DB
 - [x] Attach DB to UI
-- [ ] Add auth
+- [x] Add auth
 - [ ] Add image upload
 - [ ] Error managing
 - [ ] Routing
