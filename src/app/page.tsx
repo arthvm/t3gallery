@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 const mockUrls = [
 	"https://a4oemft7ta.ufs.sh/f/XJVOzB73MbGZo03CfXh3YVXrElnz5MT6uKmLyASfk7Nc4G8H",
 	"https://a4oemft7ta.ufs.sh/f/XJVOzB73MbGZVq8sfqTzb0pwZY5M6jUNv7esyRSKlHAPgBf3",
