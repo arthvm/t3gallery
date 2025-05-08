@@ -9,14 +9,20 @@ async function Images() {
 	const images = await getCurrentUserImages();
 
 	return (
-		<div className="flex flex-wrap justify-center gap-4">
+		<div className="flex flex-wrap justify-center gap-4 p-4">
 			{images.map((image) => (
-				<Link key={image.id} href={`/img/${image.id}`}>
-					<div key={image.id} className="flex h-48 w-48 flex-col">
-						<Image alt={image.name} src={image.url} width={192} height={192} />
-						<div>{image.name}</div>
-					</div>
-				</Link>
+				<div key={image.id} className="flex h-48 w-48 flex-col">
+					<Link href={`/img/${image.id}`}>
+						<Image
+							src={image.url}
+							style={{ objectFit: "contain" }}
+							width={192}
+							height={192}
+							alt={image.name}
+						/>
+					</Link>
+					<div>{image.name}</div>
+				</div>
 			))}
 		</div>
 	);
@@ -24,16 +30,15 @@ async function Images() {
 
 export default async function HomePage() {
 	return (
-		<main>
+		<>
 			<SignedOut>
 				<div className="h-full w-full text-center text-2xl">
 					Please sign in above
 				</div>
 			</SignedOut>
-
 			<SignedIn>
 				<Images />
 			</SignedIn>
-		</main>
+		</>
 	);
 }

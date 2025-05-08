@@ -24,12 +24,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
 	return (
 		<ClerkProvider>
-			<html lang="en" className={`${geist.variable}`}>
-				<body className="flex flex-col gap-4">
-					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-					<TopNav />
-					{children}
-					{modal}
+			<html lang="en">
+				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+				<body className={`font-sans ${geist.variable} dark`}>
+					<div className="grid h-screen grid-rows-[auto_1fr]">
+						<TopNav />
+						<main className="overflow-y-scroll">{children}</main>
+						{modal}
+					</div>
 					<div id="modal-root" />
 				</body>
 			</html>
