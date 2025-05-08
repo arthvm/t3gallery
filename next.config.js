@@ -5,7 +5,7 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {
+const coreConfig = {
 	images: {
 		remotePatterns: [{ hostname: "a4oemft7ta.ufs.sh" }],
 	},
@@ -16,5 +16,17 @@ const config = {
 		ignoreDuringBuilds: true,
 	},
 };
+
+import { withSentryConfig } from "@sentry/nextjs";
+
+const config = withSentryConfig(coreConfig, {
+	org: "arthur-mariano",
+	project: "t3gallery",
+	silent: !process.env.CI,
+	widenClientFileUpload: true,
+	tunnelRoute: "/monitoring",
+	disableLogger: true,
+	automaticVercelMonitors: true,
+});
 
 export default config;
