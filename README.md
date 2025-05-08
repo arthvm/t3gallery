@@ -7,7 +7,7 @@
 - [x] Setup DB
 - [x] Attach DB to UI
 - [x] Add auth
-- [ ] Add image upload
+- [x] Add image upload
 - [ ] Error managing
 - [ ] Routing
 - [ ] Image page
