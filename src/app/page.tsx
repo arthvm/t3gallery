@@ -1,12 +1,18 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic";
 
 async function Images() {
-	const images = await db.query.images.findMany({
-		orderBy: (model, { desc }) => desc(model.id),
-	});
+	const user = await auth();
+
+	const images = user.userId
+		? await db.query.images.findMany({
+			where: (model, { eq }) => eq(model.userId, user.userId),
+			orderBy: (model, { desc }) => desc(model.id),
+		})
+		: [];
 
 	return (
 		<div className="flex flex-wrap gap-4">
