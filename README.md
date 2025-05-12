@@ -11,6 +11,6 @@
 - [x] Error managing
 - [x] Routing
 - [x] Image page
+- [x] Analytics
 - [ ] Delete button
-- [ ] Analytics
 - [ ] Rate limiting

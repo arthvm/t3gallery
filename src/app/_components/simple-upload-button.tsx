@@ -9,6 +9,7 @@ import {
 	generatePermittedFileTypes,
 } from "uploadthing/client";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 
 function UploadSVG() {
 	return (
@@ -32,6 +33,7 @@ function UploadSVG() {
 
 export function SimpleUploadButton() {
 	const router = useRouter();
+	const posthog = usePostHog();
 
 	const [files, setFiles] = useState<File[]>([]);
 	const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -39,6 +41,12 @@ export function SimpleUploadButton() {
 	}, []);
 
 	const { startUpload, routeConfig } = useUploadThing("imageUploader", {
+		onUploadBegin: () => {
+			posthog.capture("upload-begin");
+			toast.loading("Uploading files", {
+				id: "upload-begin",
+			});
+		},
 		onClientUploadComplete: () => {
 			toast.dismiss("upload-begin");
 
@@ -54,11 +62,6 @@ export function SimpleUploadButton() {
 			setFiles([]);
 
 			toast.error("Upload failed!");
-		},
-		onUploadBegin: () => {
-			toast.loading("Uploading files", {
-				id: "upload-begin",
-			});
 		},
 	});
 
